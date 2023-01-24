@@ -1,1 +1,1 @@
-test: add catalog.xml
+test: add two more json files
