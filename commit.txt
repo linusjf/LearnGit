@@ -1,1 +1,1 @@
-test: add error xml
+test: add tidy.config
