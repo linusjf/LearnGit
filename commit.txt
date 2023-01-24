@@ -1,1 +1,1 @@
-test: add tidy.config
+test: add catalog.xml
