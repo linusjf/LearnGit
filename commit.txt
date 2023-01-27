@@ -1,1 +1,1 @@
-test: add two more json files
+test: add script to demonstrate hash objects
