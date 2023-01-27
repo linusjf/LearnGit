@@ -1,1 +1,1 @@
-test: add script to demonstrate hash objects
+test: add detailed script to demonstrate objects in git repo
