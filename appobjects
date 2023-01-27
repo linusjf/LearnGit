@@ -37,4 +37,17 @@ require git rm mkdir tree find awk head tail
   srchash="$(git cat-file "$treehash" -p | awk '{print $3}' | tail -1)"
   git cat-file "$srchash" -t
   git cat-file "$srchash" -p
+  textfilehash="$(git cat-file "$srchash" -p | awk '{print $3}' | tail -1)"
+  [ "$readmehash" == "$textfilehash" ] &&
+    echo "File contents same. Hash same."
+  echo "Added some change" >>README.md
+  git add README.md
+  git status
+  git commit -m "updated README"
+  git log
+  commithash="$(git log | awk '{print $2}' | head -1)"
+  git cat-file "$commithash" -t
+  git cat-file "$commithash" -p
+  treehash="$(git cat-file "$commithash" -p | awk '{print $2}' | head -1)"
+  git cat-file "$treehash" -p
 )
