@@ -37,6 +37,9 @@ require git rm find cat
   echo 'new file' >new.txt
   git update-index --cacheinfo 100644 "$testv2hash" "test.txt"
   git update-index --add "new.txt"
+  treehash2="$(git write-tree)"
+  git cat-file -p "$treehash2"
+  git read-tree --prefix=bak "$treehash"
   treehash="$(git write-tree)"
   git cat-file -p "$treehash"
 )
