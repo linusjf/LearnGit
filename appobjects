@@ -50,4 +50,5 @@ require git rm mkdir tree find awk head tail
   git cat-file "$commithash" -p
   treehash="$(git cat-file "$commithash" -p | awk '{print $2}' | head -1)"
   git cat-file "$treehash" -p
+  git cat-file "$treehash" -t
 )

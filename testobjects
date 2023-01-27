@@ -42,4 +42,5 @@ require git rm find cat
   git read-tree --prefix=bak "$treehash"
   treehash="$(git write-tree)"
   git cat-file -p "$treehash"
+  git cat-file -p "$treehash" | awk '{ print $3; }' | sort | uniq -c | sort -rn
 )
