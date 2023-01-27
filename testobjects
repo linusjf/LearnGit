@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+require() {
+  hash "$@" || exit
+}
+require git rm find cat
+(
+  cd ~ || exit
+  if [ -e ~/test ]; then
+    rm -rf ~/test
+  fi
+  git init test
+  cd test || exit
+  find .git/objects
+  find .git/objects -type f
+  objhash="$(echo 'test content' | git hash-object -w --stdin)"
+  echo "$objhash"
+  find .git/objects -type f
+  git cat-file -p "$objhash"
+  echo 'version 1' >test.txt
+  testhash="$(git hash-object -w test.txt)"
+  echo "$testhash"
+  echo 'version 2' >test.txt
+  testv2hash="$(git hash-object -w test.txt)"
+  echo "$testv2hash"
+  find .git/objects -type f
+  rm "test.txt"
+  git cat-file -p "$testhash" >test.txt
+  cat "test.txt"
+  git cat-file -p "$testv2hash" >test.txt
+  cat "test.txt"
+  git cat-file -t "$testhash"
+  git cat-file -t "$testv2hash"
+)
