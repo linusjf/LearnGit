@@ -2,7 +2,7 @@
 require() {
   hash "$@" || exit 127
 }
-require git rm mkdir tree find awk head
+require git rm mkdir tree find awk head tail
 (
   cd ~ || exit
   if [ -e ~/app ]; then
@@ -31,4 +31,10 @@ require git rm mkdir tree find awk head
   treehash="$(git cat-file "$commithash" -p | awk '{print $2}' | head -1)"
   git cat-file "$treehash" -t
   git cat-file "$treehash" -p
+  readmehash="$(git cat-file "$treehash" -p | awk '{print $3}' | head -1)"
+  git cat-file "$readmehash" -t
+  git cat-file "$readmehash" -p
+  srchash="$(git cat-file "$treehash" -p | awk '{print $3}' | tail -1)"
+  git cat-file "$srchash" -t
+  git cat-file "$srchash" -p
 )
