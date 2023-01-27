@@ -30,4 +30,7 @@ require git rm find cat
   cat "test.txt"
   git cat-file -t "$testhash"
   git cat-file -t "$testv2hash"
+  git update-index --add --cacheinfo 100644 "$testhash" "test.txt"
+  treehash="$(git write-tree)"
+  git cat-file -p "$treehash"
 )
