@@ -3,3 +3,4 @@ objhash="$(echo "Hello Sarah" | git hash-object -w --stdin)"
 find .git/objects -type f
 git cat-file -t "$objhash"
 git cat-file -p "$objhash"
+git show "$objhash"

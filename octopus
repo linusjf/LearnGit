@@ -29,4 +29,10 @@ require rm mkdir git
   git merge tentacle ninetacle eighttacle seventacle sixtacle fivetacle fourtacle threetacle twotacle onetacle -m 'Assemble squid'
   git log --all --oneline --graph
   git show
+  ls -la
+  git rm ./*.txt
+  git commit --amend -C HEAD
+  ls -l
+  git show
+  git show --pretty=oneline -m --stat
 )

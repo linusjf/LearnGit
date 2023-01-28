@@ -16,6 +16,7 @@ require git rm find cat
   echo "$objhash"
   find .git/objects -type f
   git cat-file -p "$objhash"
+  git show "$objhash"
   echo 'version 1' >test.txt
   testhash="$(git hash-object -w test.txt)"
   echo "$testhash"
@@ -33,14 +34,17 @@ require git rm find cat
   git update-index --add --cacheinfo 100644 "$testhash" "test.txt"
   treehash="$(git write-tree)"
   git cat-file -p "$treehash"
+  git show "$treehash"
   git cat-file -t "$treehash"
   echo 'new file' >new.txt
   git update-index --cacheinfo 100644 "$testv2hash" "test.txt"
   git update-index --add "new.txt"
   treehash2="$(git write-tree)"
   git cat-file -p "$treehash2"
+  git show "$treehash2"
   git read-tree --prefix=bak "$treehash"
   treehash="$(git write-tree)"
   git cat-file -p "$treehash"
+  git show "$treehash"
   git cat-file -p "$treehash" | awk '{ print $3; }' | sort | uniq -c | sort -rn
 )
