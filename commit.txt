@@ -1,1 +1,1 @@
-test: add detailed script to demonstrate objects in git repo
+test: add script to test octopus merge

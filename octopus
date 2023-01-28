@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+require() {
+  hash "$@" || exit 127
+}
+require rm mkdir git
+(
+  if [ -e ~/octopus ]; then
+    rm -rf ~/octopus
+  fi
+  cd ~ || exit
+  mkdir octopus
+  cd octopus || exit
+  git init
+  git commit --no-verify --allow-empty -m 'Initial commit'
+  git log --all --oneline --graph
+  git checkout -b tentacle
+  date >tentacle.txt
+  git add tentacle.txt
+  git commit -m 'Add day of tentacle.txt'
+  git log --all --oneline --graph
+  for count in nine eight seven six five four three two one; do
+    limb="${count}tacle"
+    git checkout -b "$limb" main
+    date >"${limb}.txt"
+    git add "${limb}.txt"
+    git commit -m "Add ${limb}"
+  done
+  git log --all --oneline --graph
+  git merge tentacle ninetacle eighttacle seventacle sixtacle fivetacle fourtacle threetacle twotacle onetacle -m 'Assemble squid'
+  git log --all --oneline --graph
+  git show
+)
