@@ -28,7 +28,7 @@ require git rm mkdir tree find awk head tail
   find .git/objects/ -type f
   git cat-file "$commithash" -t
   git cat-file "$commithash" -p
-  git show "$commithash"
+  git show -s --pretty=raw "$commithash"
   treehash="$(git cat-file "$commithash" -p | awk '{print $2}' | head -1)"
   git cat-file "$treehash" -t
   git cat-file "$treehash" -p
@@ -53,11 +53,10 @@ require git rm mkdir tree find awk head tail
   commithash="$(git log | awk '{print $2}' | head -1)"
   git cat-file "$commithash" -t
   git cat-file "$commithash" -p
-  git show "$commithash"
+  git show -s --pretty=raw "$commithash"
   treehash="$(git cat-file "$commithash" -p | awk '{print $2}' | head -1)"
   git cat-file "$treehash" -p
   git cat-file "$treehash" -t
   git show "$treehash"
   git ls-tree "$treehash"
-
 )
