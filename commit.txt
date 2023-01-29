@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-test: delete junk files
-=======
 test: add rawgit script
->>>>>>> b23863c (test: add rawgit script)
