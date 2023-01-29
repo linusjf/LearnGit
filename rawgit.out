@@ -1,0 +1,24 @@
+[
+  {
+    "file": "-",
+    "line": 27,
+    "endLine": 27,
+    "column": 8,
+    "endColumn": 23,
+    "level": "warning",
+    "code": 2155,
+    "message": "Declare and assign separately to avoid masking return values.",
+    "fix": null
+  },
+  {
+    "file": "-",
+    "line": 30,
+    "endLine": 30,
+    "column": 8,
+    "endColumn": 26,
+    "level": "warning",
+    "code": 2155,
+    "message": "Declare and assign separately to avoid masking return values.",
+    "fix": null
+  }
+]
