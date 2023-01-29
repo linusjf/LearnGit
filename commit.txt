@@ -1,1 +1,1 @@
-test: add submodules script
+test: add rawgit script

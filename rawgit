@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#shellcheck disable=SC2155
+require() {
+  hash "$@" || exit
+}
+require git mktemp
+colorshash="$(git hash-object -w colors.json)"
+menuhash="$(git hash-object -w menu.json)"
+temp="$(mktemp)"
+echo "$temp"
+echo -e "100644 blob $colorshash\tfile1" >"$temp"
+echo -e "100644 blob $menuhash\tfile2" >>"$temp"
+treehash="$(git mktree <"$temp")"
+temp1="$(mktemp)"
+echo "$temp1"
+echo -e "100644 blob $colorshash\tfile1.copy" >"$temp1"
+echo -e "040000 tree $treehash\tour_files" >>"$temp1"
+treehash="$(git mktree <"$temp1")"
+export GIT_INDEX_FILE="${PREFIX}/tmp/index"
+pre1=$(openssl rand -base64 6)
+pre2=$(openssl rand -base64 6)
+git read-tree --prefix="$pre1"/ "$treehash"
+git read-tree --prefix="$pre2"/ "$treehash"
+treehash="$(git write-tree)"
+git ls-tree "$treehash"
+export GIT_AUTHOR_NAME="Linus Fernandes"
+export GIT_AUTHOR_EMAIL="linus.fernandes@gmail.com"
+export GIT_AUTHOR_DATE="$(date)"
+export GIT_COMMITTER_NAME="Linus Fernandes"
+export GIT_COMMITTER_EMAIL="linus.fernandes@gmail.com"
+export GIT_COMMITTER_DATE="$(date)"
+commithash="$(echo "Committing tree" | git commit-tree "$treehash")"
+git update-ref refs/heads/main "$commithash"
+git log refs/heads/main
