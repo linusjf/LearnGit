@@ -31,8 +31,8 @@ export GIT_COMMITTER_EMAIL="linus.fernandes@gmail.com"
 export GIT_COMMITTER_DATE="$(date)"
 commithash="$(echo "Committing tree" | git commit-tree "$treehash")"
 git checkout -b newbranch
-git log refs/heads/newbranch
+git log -1 refs/heads/newbranch
 git update-ref refs/heads/newbranch "$commithash"
-git log refs/heads/newbranch
+git log -1 refs/heads/newbranch
 git checkout main
 git branch -D newbranch
