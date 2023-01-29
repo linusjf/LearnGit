@@ -1,1 +1,1 @@
-test: add -s --pretty=raw options
+test: add submodules script

@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+require() {
+  hash "$@" || exit
+}
+require git mkdir
+(
+  if [ -e "${HOME}/gitsubmodules" ]; then
+    rm -rf "${HOME}/gitsubmodules"
+  fi
+
+  mkdir "${HOME}/gitsubmodules"
+  cd "${HOME}/gitsubmodules" || exit
+  for i in a b c d; do
+    mkdir "$i"
+    cd "$i" || exit
+    git init
+    echo "module $i" >"${i}.txt"
+    git add "${i}.txt"
+    git commit -m "Initial commit, submodule $i"
+    cd .. || exit
+  done
+  mkdir super
+  cd super || exit
+  git init
+  for i in a b c d; do
+    git submodule add "${HOME}/gitsubmodules/${i}" "$i"
+  done
+  ls -a
+  git commit -m "Add submodules a, b, c and d."
+  cd .. || exit
+  git clone super cloned
+  cd cloned || exit
+  ls -a a
+  git submodule status
+  git ls-remote ../a
+  git ls-remote ../b
+  git ls-remote ../c
+  git ls-remote ../d
+  git submodule init
+  git submodule update
+  cd a || exit
+  ls -a
+  git branch
+  git checkout main
+  echo "adding a line again" >>a.txt
+  git commit -a -m "Updated the submodule from within the superproject."
+  git push
+  cd .. || exit
+  git diff
+  git add a
+  git commit -m "Updated submodule a."
+  git push
+  git pull
+  git submodule update
+)
