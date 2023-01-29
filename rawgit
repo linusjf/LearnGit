@@ -34,5 +34,5 @@ commithash="$(echo "Committing tree" | git commit-tree "$treehash")"
 git log -1 refs/heads/newbranch
 git update-ref refs/heads/newbranch "$commithash"
 git log -1 refs/heads/newbranch
-git checkout -f main
+git checkout -f development
 git branch -D newbranch
