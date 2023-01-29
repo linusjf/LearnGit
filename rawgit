@@ -34,5 +34,5 @@ git checkout -b newbranch
 git log -1 refs/heads/newbranch
 git update-ref refs/heads/newbranch "$commithash"
 git log -1 refs/heads/newbranch
-git checkout main
+git checkout -f main
 git branch -D newbranch
