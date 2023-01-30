@@ -3,7 +3,8 @@
 require() {
   hash "$@" || exit
 }
-require git mktemp
+require git mktemp openssl
+git checkout -b newbranch
 colorshash="$(git hash-object -w colors.json)"
 menuhash="$(git hash-object -w menu.json)"
 temp="$(mktemp)"
@@ -30,7 +31,6 @@ export GIT_COMMITTER_NAME="Linus Fernandes"
 export GIT_COMMITTER_EMAIL="linus.fernandes@gmail.com"
 export GIT_COMMITTER_DATE="$(date)"
 commithash="$(echo "Committing tree" | git commit-tree "$treehash")"
-git checkout -b newbranch
 git log -1 refs/heads/newbranch
 git update-ref refs/heads/newbranch "$commithash"
 git log -1 refs/heads/newbranch

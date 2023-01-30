@@ -1,1 +1,1 @@
-test: delete junk files
+test: update rawgit
