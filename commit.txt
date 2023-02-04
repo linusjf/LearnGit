@@ -1,1 +1,1 @@
-test: update rawgit
+test: test trim
